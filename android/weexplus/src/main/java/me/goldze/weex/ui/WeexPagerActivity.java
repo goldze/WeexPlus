@@ -1,6 +1,5 @@
 package me.goldze.weex.ui;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +16,7 @@ import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.utils.WXFileUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,10 +147,16 @@ public class WeexPagerActivity extends AppCompatActivity implements IWXRenderLis
     public void onException(WXSDKInstance instance, String errCode, String msg) {
         //显示网络错误
         loadingLayout.setErrorType(LoadingLayout.NETWORK_ERROR);
-        if (!TextUtils.isEmpty(msg)) {
-            loadingLayout.setErrorMessage(msg);
-            Log.e("WeexPagerActivity", msg);
+        String errMsg;
+        if ("wx_network_error".equals(errCode)) {
+            errMsg = "网络错误，请检查网络连接是否正常！";
+        } else if ("-2013".equals(errCode)) {
+            errMsg = "服务器内部错误！";
+        } else {
+            errMsg = "未知错误";
         }
+        loadingLayout.setErrorMessage(errMsg);
+        Log.e("WeexPagerActivity", msg);
     }
 
 
