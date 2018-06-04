@@ -1,4 +1,5 @@
 we/node_modules
+we/dist
 
 android/*.iml
 android/.gradle
