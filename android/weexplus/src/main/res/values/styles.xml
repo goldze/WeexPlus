@@ -1,0 +1,15 @@
+<resources>
+    <style name="ViewLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/viewLineColor</item>
+    </style>
+
+    <style name="LightInCircularProgressDrawable" parent="Material.Drawable.CircularProgress">
+        <item name="cpd_strokeColor">@color/colorPrimary</item>
+        <item name="cpd_inAnimDuration">800</item>
+        <item name="cpd_inStepPercent">0.5</item>
+        <item name="cpd_inStepColors">@array/in_colors_light</item>
+        <item name="cpd_outAnimDuration">400</item>
+    </style>
+</resources>
