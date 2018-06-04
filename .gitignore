@@ -1,8 +1,5 @@
 we/node_modules
 we/dist
-we/web
-we/configs
-we/.temp
 
 android/*.iml
 android/.gradle
