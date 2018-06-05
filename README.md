@@ -31,10 +31,9 @@ WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glid
 
 #### 1.1.1、依赖方式
 
+**源码依赖：** 下载例子程序，直接import weexplus module
 
-**源码依赖：**下载例子程序，直接import weexplus module
-
-**远程依赖：**....
+**远程依赖：** ....
 
 建议使用源码依赖的方式，方便业务扩展。
 #### 1.1.2、配置Application
@@ -45,9 +44,10 @@ WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glid
 WeexApplication.initialize(this);
 ```
 #### 1.1.3、混淆
--keep class me.goldze.weex.** { *; }</br>
+```java
+-keep class me.goldze.weex.** { *; }
 -dontwarn me.goldze.weex.**
-
+```
 ### 1.2、web视角
 
 WeexPlus可以让你在没有android开发人员的情况下，满足native功能调用的需求。
