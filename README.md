@@ -31,6 +31,7 @@ WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glid
 
 #### 1.1.1、依赖方式
 
+
 **源码依赖：**下载例子程序，直接import weexplus module
 
 **远程依赖：**....
@@ -41,7 +42,7 @@ WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glid
 继承**weexplus**中的**WeexApplication**，或者在你Application的onCreate方法中调用：
 
 ```java
-	WeexApplication.initialize(this);
+WeexApplication.initialize(this);
 ```
 #### 1.1.3、混淆
 -keep class me.goldze.weex.** { *; }</br>
@@ -57,10 +58,10 @@ WeexPlus可以让你在没有android开发人员的情况下，满足native功�
 #### 1.2.2、配置app
 项目集成好后，通过android studio打开android项目，找到app/src/main/res/values/strings.xml，修改app名称和第一个页面入口url的值。
 ```xml
-	<!--app名称-->
-    <string name="app_name">WeexPlus</string>
-    <!-- 入口url 换成你自己的第一个页面文件，可以是本地, 也可以是网络 -->
-    <string name="entrance_url">file://main_demo.js</string>
+<!--app名称-->
+<string name="app_name">WeexPlus</string>
+<!-- 入口url 换成你自己的第一个页面文件，可以是本地, 也可以是网络 -->
+<string name="entrance_url">file://main_demo.js</string>
 ```
 
 集成好后执行 ```weex run android``` 看效果
@@ -95,7 +96,7 @@ const appModule = weex.requireModule("AppModule");
         function(e) {
           //页面打开完成的回调
         },
-		function(e) {
+        function(e) {
           //页面打开失败的回调
         }
       );
