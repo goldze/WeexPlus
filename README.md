@@ -29,33 +29,35 @@ WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glid
 
 不管你是做hybrid开发，还是纯跨平台开发，android端直接依赖此库(业务逻辑交给前端去搞定 罒ω罒)。
 
-### 1.1.1、依赖方式
+#### 1.1.1、依赖方式
 
 **源码依赖：**下载例子程序，直接import weexplus module
 
 **远程依赖：**....
 
 建议使用源码依赖的方式，方便业务扩展。
-### 1.1.2、配置Application
+#### 1.1.2、配置Application
 
 继承**weexplus**中的**WeexApplication**，或者在你Application的onCreate方法中调用：
 
 ```java
 	WeexApplication.initialize(this);
 ```
+#### 1.1.3、混淆
+-keep class me.goldze.weex.** { *; }</br>
+-dontwarn me.goldze.weex.**
 
 ### 1.2、web视角
 
 WeexPlus可以让你在没有android开发人员的情况下，满足native功能调用的需求。
 
-### 1.2.1、依赖方式
+#### 1.2.1、依赖方式
 下载例子程序，将 **android** 文件夹整个放入weex目录的 **platforms** 下，不再需要命令weex platform add android生成android程序。
 
-### 1.2.2、配置app
+#### 1.2.2、配置app
 项目集成好后，通过android studio打开android项目，找到app/src/main/res/values/strings.xml，修改app名称和第一个页面入口url的值。
 ```xml
-  
-	<!--app名字-->
+	<!--app名称-->
     <string name="app_name">WeexPlus</string>
     <!-- 入口url 换成你自己的第一个页面文件，可以是本地, 也可以是网络 -->
     <string name="entrance_url">file://main_demo.js</string>
@@ -70,6 +72,111 @@ WeexPlus可以让你在没有android开发人员的情况下，满足native功�
 //App原生通信模块
 const appModule = weex.requireModule("AppModule");
 ```
+通过调用appModule.event(string,map,function,function)方法，来实现与native的通信。其中，
+
+第一个参数string：代表action，指调用功能的动作，是打开页面还是关闭页面还是选择图片；</br>
+第二个参数map：需要传入的参数；</br>
+第三个参数function：逻辑成功的回调；</br>
+第四个参数function：逻辑失败的回调。</br>
+
+所有与本地方法的通信都是按照此结构来操作。
+
+### 2.1、页面导航
+#### 2.1.1、打开页面
+打开一个带有页面加载器的新页面
+```vue
+	appModule.event(
+        "START_PAGER",
+        {
+          url: geRootIp() + "/dist/index.js",
+          title: "新页面",
+          data: {}
+        },
+        function(e) {
+          //页面打开完成的回调
+        },
+		function(e) {
+          //页面打开失败的回调
+        }
+      );
+```
+START_PAGER：动作名，表示需要打开一个新页面；</br>
+url：新页面JSBundle文件路径；</br>
+title：新页面的标题；注意：当值为NO_NAVIGATION时不显示标题栏；</br>
+data：需要传入到下一个界面的参数。
+#### 2.1.2、关闭页面
+关闭当前界面
+```vue
+	appModule.event(
+        "CLOSE_PAGER",
+        {},
+        function(e) {
+           //页面关闭完成的回调
+        },
+        function(e) {
+           //页面关闭失败的回调
+        }
+      );
+```
+CLOSE_PAGER：动作名，表示需要关闭当前界面。
+
+### 2.2、数据存储
+#### 2.2.1、写入数据
+将数据保存到手机本地
+```vue
+	appModule.event(
+        "WRITE_DATA",
+        {
+          key: "user_info",
+          value: "{'userName':'张三','age':'18岁'}"
+        },
+        function(e) {
+          toastModule.showShort("写入成功!");
+        }
+      );
+```
+WRITE_DATA：动作名，表示需要写入数据；</br>
+key：键名称；
+value：存入的数据。
+#### 2.2.2、读取数据
+将数据保存到手机本地
+```vue
+	appModule.event(
+        "READ_DATA",
+        {
+          key: "user_info"
+        },
+        function(e) {
+          toastModule.showShort(e.value);
+        }
+      );
+```
+READ_DATA：动作名，表示需要读取数据；</br>
+key：键名称；</br>
+e.value：在成功回调的方法中，得到存入的值。
+
+### 2.3、图片选择
+将数据保存到手机本地
+```vue
+	appModule.event(
+        "IMAGE_SELECT",
+        {},
+        function(e) {
+          toastModule.showShort("选择了" + e.imgs.length + "张照片");
+        },
+        function(e) {
+          toastModule.showShort("图片选择失败!");
+        }
+      );
+```
+IMAGE_SELECT：动作名，表示打开图片选择器选择图片；</br>
+e.imgs：多张图片绝对路径的集合，**WeexPlus** 中配置了ImageAdapter，可直接通过image组件的 :src属性加载。
+
+
+
+
+
+## 效果图
 
 
 ## <span id="xgwd">相关文档</span>

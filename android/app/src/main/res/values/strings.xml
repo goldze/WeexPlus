@@ -1,5 +1,5 @@
 <resources>
-    <!--app名字-->
+    <!--app名称-->
     <string name="app_name">WeexPlus</string>
     <!-- 入口url 换成你自己的第一个页面文件，可以是本地, 也可以是网络 -->
     <string name="entrance_url">file://main_demo.js</string>

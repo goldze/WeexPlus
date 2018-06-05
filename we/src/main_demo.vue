@@ -46,6 +46,9 @@ export default {
         },
         function(e) {
           toastModule.showShort("打开页面成功!");
+        },
+        function(e) {
+           toastModule.showShort("打开页面失败!");
         }
       );
     },
