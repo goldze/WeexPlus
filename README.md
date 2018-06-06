@@ -187,7 +187,7 @@ e.imgs：多张图片绝对路径的集合，WeexPlus 中配置了ImageAdapter�
 ### 2.4、二维码
 #### 2.4.1、识别二维码
 打开二维码识别界面(二维码采用Google ZXing开源方案)。
-```javascript
+```vue
       appModule.event(
         "SCANNING_QR",
         {},
@@ -205,18 +205,19 @@ e.result：二维码识别的结果，返回一个字符串
 功能暂时屏蔽，大多数生成二维码的需求是由服务端实现
 
 ## 效果图
-<img src="./imgs/img1.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img2.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img3.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img4.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img5.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img6.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img7.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img8.png" width="360" hegiht="640" align=center />
-<img src="./imgs/img9.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img1.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img2.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img3.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img4.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img5.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img6.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img7.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img8.png" width="288" hegiht="512" align=center />
+<img src="./imgs/img9.png" width="288" hegiht="512" align=center />
 
 
 ## <span id="xgwd">相关文档</span>
+<span id="xgwd">相关文档</span>
 
 [Weex概念快速上手](https://weex.apache.org/cn/guide/index.html?spm=a2c4g.11186623.2.3.RFPXAb)
 
