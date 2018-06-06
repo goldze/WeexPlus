@@ -33,7 +33,8 @@ export default {
   },
   data: {
     imgs: "",
-    imgsShow: false
+    imgsShow: false,
+    bitmap: ""
   },
   methods: {
     //打开新页面
@@ -114,6 +115,23 @@ export default {
         },
         function(e) {
           toastModule.showShort("扫描失败，请检查权限是否打开!");
+        }
+      );
+    },
+    //生成二维码
+    produceQRCode: function() {
+      var _this = this;
+      appModule.event(
+        "PRODUCE_QR",
+        {
+          body: "https://github.com/goldze/WeexPlus"
+        },
+        function(e) {
+          toastModule.showShort("生成成功!");
+          _this.bitmap = e.bitmap;
+        },
+        function(e) {
+          toastModule.showShort("二维码生成失败!");
         }
       );
     },

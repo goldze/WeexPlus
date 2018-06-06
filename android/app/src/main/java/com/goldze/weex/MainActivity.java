@@ -3,11 +3,9 @@ package com.goldze.weex;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
 
 import java.util.HashMap;
 
-import me.goldze.weex.WeexApplication;
 import me.goldze.weex.ui.WeexPagerActivity;
 
 public class MainActivity extends AppCompatActivity {

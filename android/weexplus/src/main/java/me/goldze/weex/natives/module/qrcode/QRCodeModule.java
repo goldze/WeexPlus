@@ -3,9 +3,15 @@ package me.goldze.weex.natives.module.qrcode;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.HashMap;
@@ -34,12 +40,13 @@ public class QRCodeModule extends BaseWeexModule {
                 scanningQR(weexEventBean);
             }
         });
-        super.register(EventConstant.ACTION.PRODUCE_QR, new Consumer<WeexEventBean>() {
-            @Override
-            public void accept(WeexEventBean weexEventBean) throws Exception {
-                produceQR(weexEventBean);
-            }
-        });
+        //生成二维码，功能暂时屏蔽，大多数生成二维码的需求是由服务端实现
+//        super.register(EventConstant.ACTION.PRODUCE_QR, new Consumer<WeexEventBean>() {
+//            @Override
+//            public void accept(WeexEventBean weexEventBean) throws Exception {
+//                produceQR(weexEventBean);
+//            }
+//        });
     }
 
     /**
@@ -69,6 +76,29 @@ public class QRCodeModule extends BaseWeexModule {
      * @param weexEventBean
      */
     private void produceQR(WeexEventBean weexEventBean) {
+        try {
+            String str = (String) weexEventBean.getParams().get("body");
+            Bitmap bitmap = createBitmap(str);
+            Map<String, Object> data = new HashMap<>();
+            data.put("bitmap", bitmap);
+            callbackSuccess(weexEventBean, data);
+        } catch (Exception e) {
+            callbackFail(weexEventBean);
+        }
+    }
+
+    /**
+     * 传入一串字符串，生成二维码Bitmap
+     *
+     * @param str
+     * @return
+     */
+    public Bitmap createBitmap(String str) throws WriterException {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        BitMatrix result = multiFormatWriter.encode(str, BarcodeFormat.QR_CODE, 400, 400);
+        BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+        Bitmap bitmap = barcodeEncoder.createBitmap(result);
+        return bitmap;
     }
 
     /**

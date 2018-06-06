@@ -79,7 +79,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.geRootIp = geRootIp;
 exports.getUrl = getUrl;
 exports.getQueryVariable = getQueryVariable;
-var IP_ROOT = "http://192.168.17.104:8082";
+var IP_ROOT = "http://192.168.17.108:8082";
 function geRootIp() {
     return IP_ROOT;
 }
@@ -493,13 +493,9 @@ var _wxcButton = __webpack_require__(4);
 
 var _wxcButton2 = _interopRequireDefault(_wxcButton);
 
-var _methods;
-
 var _base = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //网络请求
 var stream = weex.requireModule("stream");
@@ -534,9 +530,10 @@ exports.default = {
   },
   data: {
     imgs: "",
-    imgsShow: false
+    imgsShow: false,
+    bitmap: ""
   },
-  methods: (_methods = {
+  methods: {
     //打开新页面
     openPager: function openPager() {
       appModule.event("START_PAGER", {
@@ -581,29 +578,47 @@ exports.default = {
       }, function (e) {
         toastModule.showShort("定位失败，请检查权限是否打开!");
       });
+    },
+    //扫描二维码
+    scanningQRCode: function scanningQRCode() {
+      appModule.event("SCANNING_QR", {}, function (e) {
+        toastModule.showShort(e.result);
+      }, function (e) {
+        toastModule.showShort("扫描失败，请检查权限是否打开!");
+      });
+    },
+    //生成二维码
+    produceQRCode: function produceQRCode() {
+      var _this = this;
+      appModule.event("PRODUCE_QR", {
+        body: "https://github.com/goldze/WeexPlus"
+      }, function (e) {
+        toastModule.showShort("生成成功!");
+        _this.bitmap = e.bitmap;
+      }, function (e) {
+        toastModule.showShort("二维码生成失败!");
+      });
+    },
+    //选择图片
+    imageSelect: function imageSelect() {
+      var _this = this;
+      appModule.event("IMAGE_SELECT", {}, function (e) {
+        _this.imgsShow = true;
+        _this.imgs = e.imgs;
+        toastModule.showShort("选择了" + e.imgs.length + "张照片");
+      }, function (e) {
+        toastModule.showShort("图片选择失败!");
+      });
+    },
+    //打开天气预报界面
+    openWeather: function openWeather() {
+      appModule.event("START_PAGER", {
+        url: (0, _base.geRootIp)() + "/dist/weather.js",
+        title: "NO_NAVIGATION",
+        data: {}
+      });
     }
-  }, _defineProperty(_methods, "requestLocation", function requestLocation() {
-    appModule.event("SCANNING_QR", {}, function (e) {
-      toastModule.showShort(e.result);
-    }, function (e) {
-      toastModule.showShort("扫描失败，请检查权限是否打开!");
-    });
-  }), _defineProperty(_methods, "imageSelect", function imageSelect() {
-    var _this = this;
-    appModule.event("IMAGE_SELECT", {}, function (e) {
-      _this.imgsShow = true;
-      _this.imgs = e.imgs;
-      toastModule.showShort("选择了" + e.imgs.length + "张照片");
-    }, function (e) {
-      toastModule.showShort("图片选择失败!");
-    });
-  }), _defineProperty(_methods, "openWeather", function openWeather() {
-    appModule.event("START_PAGER", {
-      url: (0, _base.geRootIp)() + "/dist/weather.js",
-      title: "NO_NAVIGATION",
-      data: {}
-    });
-  }), _methods)
+  }
 };
 
 /***/ }),
@@ -656,18 +671,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _c('wxc-button', {
     staticClass: ["btnStyle"],
     attrs: {
-      "text": "选择图片"
-    },
-    on: {
-      "wxcButtonClicked": _vm.imageSelect
-    }
-  }), _c('wxc-button', {
-    staticClass: ["btnStyle"],
-    attrs: {
       "text": "扫描二维码"
     },
     on: {
       "wxcButtonClicked": _vm.scanningQRCode
+    }
+  }), _c('wxc-button', {
+    staticClass: ["btnStyle"],
+    attrs: {
+      "text": "选择图片"
+    },
+    on: {
+      "wxcButtonClicked": _vm.imageSelect
     }
   }), (_vm.imgsShow) ? _c('scroller', {
     staticClass: ["scroller-img"],
