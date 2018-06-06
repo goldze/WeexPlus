@@ -209,7 +209,6 @@ e.result：二维码识别的结果，返回一个字符串
 
 
 ## <div id="xgwd">相关文档</div>
-<div id="xgwd">相关文档</div>
 
 [Weex概念快速上手](https://weex.apache.org/cn/guide/index.html?spm=a2c4g.11186623.2.3.RFPXAb)
 
