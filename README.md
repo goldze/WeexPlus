@@ -32,13 +32,13 @@ WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glid
 **源码依赖：** 下载例子程序，直接import weexplus module
 ``
 **远程依赖：** 
-``` 
+```java
     //添加仓库支持
     allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+        repositories {
+          ...
+          maven { url 'https://jitpack.io' }
+        }
 	}
 
     //远程依赖
