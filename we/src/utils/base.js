@@ -1,4 +1,4 @@
-var IP_ROOT = "http://192.168.17.104:8082";
+var IP_ROOT = "http://192.168.17.108:8082";
 export function geRootIp() {
     return IP_ROOT;
 }

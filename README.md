@@ -105,10 +105,23 @@ START_PAGER：动作名，表示需要打开一个新页面；</br>
 url：新页面JSBundle文件路径；</br>
 title：新页面的标题；注意：当值为NO_NAVIGATION时不显示标题栏；</br>
 data：需要传入到下一个界面的参数。
+
+如果需要将参数传入下一个页面，这里提供了两种方法：
+
+- 一种是，将参数放入url中，例如http:...?user=123&psw=abc，新页面通过weex.config.bundleUrl拿到当前url，通过字符串截取的方式取出参数值。
+- 另一种是，在新页面的created方法中，获取data字段传入过来的数据(推荐)。
+```vue
+    created: function () {
+      globalEvent.addEventListener("init", function(e) {
+		//e.data即是上个页面data字段传过来的值
+        console.log(e.data);
+      });
+    },
+```
 #### 2.1.2、关闭页面
 关闭当前界面
 ```vue
-	appModule.event(
+      appModule.event(
         "CLOSE_PAGER",
         {},
         function(e) {
@@ -122,10 +135,11 @@ data：需要传入到下一个界面的参数。
 CLOSE_PAGER：动作名，表示需要关闭当前界面。
 
 ### 2.2、数据存储
+这里说明一下：本身weex提供了storage模块, 为什么这里又要自己写一个SharedPreferences存储呢？为的是weex与原生更好的通信。比如混合开发时, 登录界面是原生界面，登录成功后本地保存用户唯一标识，当进入weex界面时可以通过该模块取出用户唯一标识，实现相应逻辑。
 #### 2.2.1、写入数据
 将数据保存到手机本地
 ```vue
-	appModule.event(
+      appModule.event(
         "WRITE_DATA",
         {
           key: "user_info",
@@ -140,9 +154,9 @@ WRITE_DATA：动作名，表示需要写入数据；</br>
 key：键名称；
 value：存入的数据。
 #### 2.2.2、读取数据
-将数据保存到手机本地
+读取本地存储的数据
 ```vue
-	appModule.event(
+      appModule.event(
         "READ_DATA",
         {
           key: "user_info"
@@ -157,9 +171,8 @@ key：键名称；</br>
 e.value：在成功回调的方法中，得到存入的值。
 
 ### 2.3、图片选择
-将数据保存到手机本地
 ```vue
-	appModule.event(
+      appModule.event(
         "IMAGE_SELECT",
         {},
         function(e) {
@@ -170,14 +183,29 @@ e.value：在成功回调的方法中，得到存入的值。
         }
       );
 ```
-IMAGE_SELECT：动作名，表示打开图片选择器选择图片；</br>
-e.imgs：多张图片绝对路径的集合，**WeexPlus** 中配置了ImageAdapter，可直接通过image组件的 :src属性加载。
+IMAGE_SELECT：动作名，表示打开图片选择器选择图片；
+e.imgs：多张图片绝对路径的集合，WeexPlus 中配置了ImageAdapter，可直接通过image组件的 :src属性加载。
 
-
-
-
+### 2.4、二维码
+#### 2.4.1、识别二维码
+打开二维码识别界面识别二维码(二维码采用Google ZXing开源方案)。
+```vue
+      appModule.event(
+        "SCANNING_QR",
+        {},
+        function(e) {
+          toastModule.showShort(e.result);
+        },
+        function(e) {
+          toastModule.showShort("扫描失败，请检查权限是否打开!");
+        }
+      );
+```
+SCANNING_QR：动作名，表示打开二维码识别界面；</br>
+e.result：二维码识别的结果，返回一个字符串
 
 ## 效果图
+
 
 
 ## <span id="xgwd">相关文档</span>
@@ -189,3 +217,18 @@ e.imgs：多张图片绝对路径的集合，**WeexPlus** 中配置了ImageAdapt
 [Weex工程原理](https://weex.apache.org/cn/wiki/?spm=a2c4g.11186623.2.5.RFPXAb)
 
 
+## License
+
+	 Copyright 2018 goldze(曾宪泽)
+ 
+	 Licensed under the Apache License, Version 2.0 (the "License");
+	 you may not use this file except in compliance with the License.
+	 You may obtain a copy of the License at
+ 
+	    http://www.apache.org/licenses/LICENSE-2.0
+ 
+	 Unless required by applicable law or agreed to in writing, software
+	 distributed under the License is distributed on an "AS IS" BASIS,
+	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 See the License for the specific language governing permissions and
+	 limitations under the License.

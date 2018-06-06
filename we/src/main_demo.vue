@@ -5,6 +5,7 @@
     <wxc-button class="btnStyle" text="写入磁盘" @wxcButtonClicked="writeData"></wxc-button>
     <wxc-button class="btnStyle" text="读取磁盘" @wxcButtonClicked="readData"></wxc-button>
     <wxc-button class="btnStyle" text="获取经纬度" @wxcButtonClicked="requestLocation"></wxc-button>
+    <wxc-button class="btnStyle" text="扫描二维码" @wxcButtonClicked="scanningQRCode"></wxc-button>
     <wxc-button class="btnStyle" text="选择图片" @wxcButtonClicked="imageSelect"></wxc-button>
     <scroller v-if="imgsShow" scroll-direction="horizontal" class="scroller-img">
       <div v-for="i in imgs" :key="i">
@@ -48,7 +49,7 @@ export default {
           toastModule.showShort("打开页面成功!");
         },
         function(e) {
-           toastModule.showShort("打开页面失败!");
+          toastModule.showShort("打开页面失败!");
         }
       );
     },
@@ -100,6 +101,19 @@ export default {
         },
         function(e) {
           toastModule.showShort("定位失败，请检查权限是否打开!");
+        }
+      );
+    },
+    //扫描二维码
+    scanningQRCode: function() {
+      appModule.event(
+        "SCANNING_QR",
+        {},
+        function(e) {
+          toastModule.showShort(e.result);
+        },
+        function(e) {
+          toastModule.showShort("扫描失败，请检查权限是否打开!");
         }
       );
     },

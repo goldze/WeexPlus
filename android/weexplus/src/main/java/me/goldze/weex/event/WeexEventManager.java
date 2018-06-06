@@ -5,11 +5,12 @@ import java.util.List;
 
 import me.goldze.weex.event.bean.WeexEventBean;
 import me.goldze.weex.natives.base.IBaseWeexModule;
-import me.goldze.weex.natives.module.ActivityModule;
-import me.goldze.weex.natives.module.ImageSelectModule;
-import me.goldze.weex.natives.module.LocationModule;
+import me.goldze.weex.natives.module.pager.ActivityModule;
+import me.goldze.weex.natives.module.image_selector.ImageSelectModule;
+import me.goldze.weex.natives.module.location.LocationModule;
 import me.goldze.weex.event.rx.RxBus;
-import me.goldze.weex.natives.module.SPModule;
+import me.goldze.weex.natives.module.qrcode.QRCodeModule;
+import me.goldze.weex.natives.module.sp.SPModule;
 
 /**
  * Created by goldze on 2018/3/28 0028.
@@ -27,6 +28,8 @@ public class WeexEventManager {
         modules.add(new LocationModule());
         //添加SharedPreferences模块
         modules.add(new SPModule());
+        //添加二维码模块
+        modules.add(new QRCodeModule());
         //添加图片选择模块
         modules.add(new ImageSelectModule());
     }

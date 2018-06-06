@@ -1,4 +1,4 @@
-package me.goldze.weex.natives.module;
+package me.goldze.weex.natives.module.sp;
 
 import java.util.HashMap;
 import java.util.Map;

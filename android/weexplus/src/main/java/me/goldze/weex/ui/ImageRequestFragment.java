@@ -22,11 +22,11 @@ import me.goldze.weex.adapter.WeexGlideEngine;
 import me.goldze.weex.natives.base.ImageSelectorBean;
 
 /**
- * 该页面对用户完全透明，作为路由处理图片选择
+ * 该页面对用户完全透明，作为路由处理图片的返回结果
  * Created by goldze on 2018/6/1 0001.
  */
 
-public class ImageSelectorFragment extends Fragment {
+public class ImageRequestFragment extends Fragment {
     private final int RESULT_CODE = 0001;
     private PublishSubject<ImageSelectorBean> subject;
 

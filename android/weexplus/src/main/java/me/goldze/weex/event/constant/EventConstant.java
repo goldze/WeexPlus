@@ -19,6 +19,10 @@ public class EventConstant {
         public static final String WRITE_DATA = "WRITE_DATA";
         //请求定位经纬度
         public static final String REQUEST_LOCATION = "REQUEST_LOCATION";
+        //扫描二维码
+        public static final String SCANNING_QR = "SCANNING_QR";
+        //生成二维码
+        public static final String PRODUCE_QR = "PRODUCE_QR";
         //选择图片
         public static final String IMAGE_SELECT = "IMAGE_SELECT";
     }

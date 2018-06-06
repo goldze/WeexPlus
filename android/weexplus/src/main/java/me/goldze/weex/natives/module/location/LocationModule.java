@@ -1,4 +1,4 @@
-package me.goldze.weex.natives.module;
+package me.goldze.weex.natives.module.location;
 
 import android.Manifest;
 import android.app.Activity;

@@ -493,13 +493,18 @@ var _wxcButton = __webpack_require__(4);
 
 var _wxcButton2 = _interopRequireDefault(_wxcButton);
 
+var _methods;
+
 var _base = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //网络请求
 var stream = weex.requireModule("stream");
 //全局的App原生通信模块
+//
 //
 //
 //
@@ -531,7 +536,7 @@ exports.default = {
     imgs: "",
     imgsShow: false
   },
-  methods: {
+  methods: (_methods = {
     //打开新页面
     openPager: function openPager() {
       appModule.event("START_PAGER", {
@@ -540,6 +545,8 @@ exports.default = {
         data: {}
       }, function (e) {
         toastModule.showShort("打开页面成功!");
+      }, function (e) {
+        toastModule.showShort("打开页面失败!");
       });
     },
     //关闭新页面
@@ -574,27 +581,29 @@ exports.default = {
       }, function (e) {
         toastModule.showShort("定位失败，请检查权限是否打开!");
       });
-    },
-    //选择图片
-    imageSelect: function imageSelect() {
-      var _this = this;
-      appModule.event("IMAGE_SELECT", {}, function (e) {
-        _this.imgsShow = true;
-        _this.imgs = e.imgs;
-        toastModule.showShort("选择了" + e.imgs.length + "张照片");
-      }, function (e) {
-        toastModule.showShort("图片选择失败!");
-      });
-    },
-    //打开天气预报界面
-    openWeather: function openWeather() {
-      appModule.event("START_PAGER", {
-        url: (0, _base.geRootIp)() + "/dist/weather.js",
-        title: "NO_NAVIGATION",
-        data: {}
-      });
     }
-  }
+  }, _defineProperty(_methods, "requestLocation", function requestLocation() {
+    appModule.event("SCANNING_QR", {}, function (e) {
+      toastModule.showShort(e.result);
+    }, function (e) {
+      toastModule.showShort("扫描失败，请检查权限是否打开!");
+    });
+  }), _defineProperty(_methods, "imageSelect", function imageSelect() {
+    var _this = this;
+    appModule.event("IMAGE_SELECT", {}, function (e) {
+      _this.imgsShow = true;
+      _this.imgs = e.imgs;
+      toastModule.showShort("选择了" + e.imgs.length + "张照片");
+    }, function (e) {
+      toastModule.showShort("图片选择失败!");
+    });
+  }), _defineProperty(_methods, "openWeather", function openWeather() {
+    appModule.event("START_PAGER", {
+      url: (0, _base.geRootIp)() + "/dist/weather.js",
+      title: "NO_NAVIGATION",
+      data: {}
+    });
+  }), _methods)
 };
 
 /***/ }),
@@ -651,6 +660,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "wxcButtonClicked": _vm.imageSelect
+    }
+  }), _c('wxc-button', {
+    staticClass: ["btnStyle"],
+    attrs: {
+      "text": "扫描二维码"
+    },
+    on: {
+      "wxcButtonClicked": _vm.scanningQRCode
     }
   }), (_vm.imgsShow) ? _c('scroller', {
     staticClass: ["scroller-img"],

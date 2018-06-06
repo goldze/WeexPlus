@@ -4,6 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!--读取储存-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--请求相机-->
+    <uses-permission android:name="Manifest.permission.CAMERA" />
     <!--获取经纬度-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />

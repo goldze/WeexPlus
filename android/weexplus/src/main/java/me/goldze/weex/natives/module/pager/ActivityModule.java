@@ -1,4 +1,4 @@
-package me.goldze.weex.natives.module;
+package me.goldze.weex.natives.module.pager;
 
 import android.app.Activity;
 import android.content.Intent;
