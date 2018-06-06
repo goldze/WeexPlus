@@ -1,11 +1,8 @@
 # WeexPlus
 
-为解决目前移动开发频繁的迭代、开发周期长、人员成本高的问题，移动跨平台开发方案层出不穷。 **WeexPlus则是一款基于阿里[weex](http://weex.apache.org/cn/)跨平台方案(android/ios/h5)开发的weex端与android native交互的组件扩展库，提供页面导航、数据存储、图片选择、二维码识别/生成、权限等原生功能**。web开发者不用再为调用native功能而烦恼，android开发者轻松搞定hybrid开发。
+为解决目前移动开发频繁的迭代、开发周期长、人员成本高的问题，移动跨平台开发方案层出不穷。 **WeexPlus则是一款基于阿里[weex](http://weex.apache.org/cn/)跨平台方案(android/ios/h5)开发的weex端与android native交互的组件扩展库，提供页面导航、数据存储、图片选择、二维码识别、权限等原生功能**。web开发者不用再为调用native功能而烦恼，android开发者轻松搞定hybrid开发。
 
 如果你想采用纯原生快速开发方案，请移步：[MVVMHabit](https://github.com/goldze/MVVMHabit)
-## 框架流程
-
-
 
 ## 框架特点
 - **快速集成**
@@ -26,7 +23,7 @@
 根据官方介绍配置安装weex开发环境
 
 ### 1.1、android视角
-WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glide](https://github.com/bumptech/glide)、[rxpermissions2](https://github.com/tbruyelle/RxPermissions)、[rxjava2](https://github.com/ReactiveX/RxJava)、[matisse](https://github.com/zhihu/Matisse)、[zxing](https://github.com/zxing/zxing)、[material](https://github.com/rey5137/material)的一套android library。提供了页面导航、数据存储、图片选择、二维码识别/生成、权限等原生功能给weex端调用，节约了自己再去开发这样一套库的时间成本。
+WeexPlus是集成了[weex_sdk](https://github.com/apache/incubator-weex)、[glide](https://github.com/bumptech/glide)、[rxpermissions2](https://github.com/tbruyelle/RxPermissions)、[rxjava2](https://github.com/ReactiveX/RxJava)、[matisse](https://github.com/zhihu/Matisse)、[zxing](https://github.com/zxing/zxing)、[material](https://github.com/rey5137/material)的一套android library。提供了页面导航、数据存储、图片选择、二维码识别、权限等原生功能给weex端调用，节约了自己再去开发这样一套库的时间成本。
 
 不管你是做hybrid开发，还是纯跨平台开发，android端直接依赖此库(业务逻辑交给前端去搞定 罒ω罒)。
 
@@ -208,7 +205,15 @@ e.result：二维码识别的结果，返回一个字符串
 功能暂时屏蔽，大多数生成二维码的需求是由服务端实现
 
 ## 效果图
-
+<img src="./imgs/img1.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img2.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img3.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img4.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img5.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img6.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img7.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img8.png" width="360" hegiht="640" align=center />
+<img src="./imgs/img9.png" width="360" hegiht="640" align=center />
 
 
 ## <span id="xgwd">相关文档</span>
