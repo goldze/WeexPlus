@@ -190,7 +190,7 @@ e.value：在成功回调的方法中，得到存入的值。
         }
       );
 ```
-IMAGE_SELECT：动作名，表示打开图片选择器选择图片；
+IMAGE_SELECT：动作名，表示打开图片选择器选择图片；</br>
 e.imgs：多张图片绝对路径的集合，WeexPlus 中配置了ImageAdapter，可直接通过image组件的 :src属性加载。
 
 ### 2.4、二维码
