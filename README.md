@@ -76,11 +76,11 @@ WeexPlus可以让你在没有android开发人员的情况下，满足native功�
 ## 2、weex调用
 导入 **WeexPlus** 的 **AppModule** 组件
 
-```vue
+```javascript
 //App原生通信模块
 const appModule = weex.requireModule("AppModule");
 ```
-通过调用appModule.event(string,map,function,function)方法，来实现与native的通信。其中，
+通过调用** appModule.event(string,map,function,function) **方法，来实现与native的通信。其中，
 
 第一个参数string：代表action，指调用功能的动作，是打开页面还是关闭页面还是选择图片；</br>
 第二个参数map：需要传入的参数；</br>
@@ -92,21 +92,21 @@ const appModule = weex.requireModule("AppModule");
 ### 2.1、页面导航
 #### 2.1.1、打开页面
 打开一个带有页面加载器的新页面
-```vue
-	appModule.event(
-        "START_PAGER",
-        {
-          url: geRootIp() + "/dist/index.js",
-          title: "新页面",
-          data: {}
-        },
-        function(e) {
-          //页面打开完成的回调
-        },
-        function(e) {
-          //页面打开失败的回调
-        }
-      );
+```javascript
+appModule.event(
+    "START_PAGER",
+    {
+        url: geRootIp() + "/dist/index.js",
+        title: "新页面",
+        data: {}
+    },
+    function(e) {
+        //页面打开完成的回调
+    },
+    function(e) {
+        //页面打开失败的回调
+    }
+);
 ```
 START_PAGER：动作名，表示需要打开一个新页面；</br>
 url：新页面JSBundle文件路径；</br>
@@ -117,7 +117,7 @@ data：需要传入到下一个界面的参数。
 
 - 一种是，将参数放入url中，例如http:...?user=123&psw=abc，新页面通过weex.config.bundleUrl拿到当前url，通过字符串截取的方式取出参数值。
 - 另一种是，在新页面的created方法中，获取data字段传入过来的数据(推荐)。
-```vue
+```javascript
     created: function () {
       globalEvent.addEventListener("init", function(e) {
 		//e.data即是上个页面data字段传过来的值
@@ -127,17 +127,17 @@ data：需要传入到下一个界面的参数。
 ```
 #### 2.1.2、关闭页面
 关闭当前界面
-```vue
-      appModule.event(
-        "CLOSE_PAGER",
-        {},
-        function(e) {
-           //页面关闭完成的回调
-        },
-        function(e) {
-           //页面关闭失败的回调
-        }
-      );
+```javascript
+appModule.event(
+    "CLOSE_PAGER",
+    {},
+    function(e) {
+        //页面关闭完成的回调
+    },
+    function(e) {
+        //页面关闭失败的回调
+    }
+);
 ```
 CLOSE_PAGER：动作名，表示需要关闭当前界面。
 
@@ -145,50 +145,50 @@ CLOSE_PAGER：动作名，表示需要关闭当前界面。
 这里说明一下：本身weex提供了storage模块, 为什么这里又要自己写一个SharedPreferences存储呢？为的是weex与原生更好的通信。比如混合开发时, 登录界面是原生界面，登录成功后本地保存用户唯一标识，当进入weex界面时可以通过该模块取出用户唯一标识，实现相应逻辑。
 #### 2.2.1、写入数据
 将数据保存到手机本地
-```vue
-      appModule.event(
-        "WRITE_DATA",
-        {
-          key: "user_info",
-          value: "{'userName':'张三','age':'18岁'}"
-        },
-        function(e) {
-          toastModule.showShort("写入成功!");
-        }
-      );
+```javascript
+appModule.event(
+    "WRITE_DATA",
+    {
+        key: "user_info",
+        value: "{'userName':'张三','age':'18岁'}"
+    },
+    function(e) {
+        toastModule.showShort("写入成功!");
+    }
+);
 ```
 WRITE_DATA：动作名，表示需要写入数据；</br>
 key：键名称；
 value：存入的数据。
 #### 2.2.2、读取数据
 读取本地存储的数据
-```vue
-      appModule.event(
-        "READ_DATA",
-        {
-          key: "user_info"
-        },
-        function(e) {
-          toastModule.showShort(e.value);
-        }
-      );
+```javascript
+appModule.event(
+    "READ_DATA",
+    {
+        key: "user_info"
+    },
+    function(e) {
+        toastModule.showShort(e.value);
+    }
+);
 ```
 READ_DATA：动作名，表示需要读取数据；</br>
 key：键名称；</br>
 e.value：在成功回调的方法中，得到存入的值。
 
 ### 2.3、图片选择
-```vue
-      appModule.event(
-        "IMAGE_SELECT",
-        {},
-        function(e) {
-          toastModule.showShort("选择了" + e.imgs.length + "张照片");
-        },
-        function(e) {
-          toastModule.showShort("图片选择失败!");
-        }
-      );
+```javascript
+appModule.event(
+    "IMAGE_SELECT",
+    {},
+    function(e) {
+        toastModule.showShort("选择了" + e.imgs.length + "张照片");
+    },
+    function(e) {
+        toastModule.showShort("图片选择失败!");
+    }
+);
 ```
 IMAGE_SELECT：动作名，表示打开图片选择器选择图片；</br>
 e.imgs：多张图片绝对路径的集合，WeexPlus 中配置了ImageAdapter，可直接通过image组件的 :src属性加载。
@@ -196,17 +196,17 @@ e.imgs：多张图片绝对路径的集合，WeexPlus 中配置了ImageAdapter�
 ### 2.4、二维码
 #### 2.4.1、识别二维码
 打开二维码识别界面(二维码采用Google ZXing开源方案)。
-```vue
-      appModule.event(
-        "SCANNING_QR",
-        {},
-        function(e) {
-          toastModule.showShort(e.result);
-        },
-        function(e) {
-          toastModule.showShort("扫描失败，请检查权限是否打开!");
-        }
-      );
+```javascript
+appModule.event(
+    "SCANNING_QR",
+    {},
+    function(e) {
+        toastModule.showShort(e.result);
+    },
+    function(e) {
+        toastModule.showShort("扫描失败，请检查权限是否打开!");
+    }
+);
 ```
 SCANNING_QR：动作名，表示打开二维码识别界面；</br>
 e.result：二维码识别的结果，返回一个字符串
